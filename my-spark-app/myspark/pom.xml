@@ -42,23 +42,28 @@
           <show>public</show>
           <nohelp>true</nohelp>
         </configuration>
-      </plugin>
+      </plugin>      
       <plugin>
-        <!-- Use mvn assembly:single -->
+        <!-- Use mvn package -->
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <version>2.6</version>
-        <configuration>
-          <archive>
-            <manifest>
-              <mainClass>spark.Tutorial</mainClass>
-            </manifest>
-          </archive>
-          <descriptorRefs>
-            <descriptorRef>jar-with-dependencies</descriptorRef>
-          </descriptorRefs>
-          <appendAssemblyId>false</appendAssemblyId>
-        </configuration>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>2.4.3</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <transformers>
+                <transformer 
+                  implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                    <mainClass>spark.SimpleApp</mainClass>
+                </transformer>
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

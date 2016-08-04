@@ -24,6 +24,8 @@ RUN mkdir -p /desenv/java && mvn -v
 ADD my-spark-app /desenv/java
 WORKDIR /desenv/java
 
+VOLUME /shared-with-host
+
 # VOLUME /root/.m2/repository
 COPY m2-repo /root/.m2/repository
 RUN cd myspark && mvn clean compile test package install
