@@ -11,5 +11,8 @@ echo "App app = new App()" && \
 echo "String[] args = {"\"JPA"\"}" && \
 echo "App.main(args)" 
 
-docker run -i -t --rm --name spark-j9 --link mysql_db:mysql $HUB_USER_NAME/jshell-spark bash
+docker run -i -t --rm --name spark-j9 \
+       --link my-spark:my-spark \
+       --link mysql_db:mysql \
+       $HUB_USER_NAME/jshell-spark bash
 
